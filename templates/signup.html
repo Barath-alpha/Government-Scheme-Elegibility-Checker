@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Account | SchemeHelper.AI{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon" style="background: var(--green-light); color: var(--green);">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <h2>Create Citizen Account</h2>
+            <p>Quick registration using UIDAI / Aadhaar integration</p>
+        </div>
+
+        <form action="/dashboard" method="GET" class="auth-form">
+            <div class="form-group">
+                <label>Full Name (as per Aadhaar)</label>
+                <div class="input-icon-wrap">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" name="full_name" placeholder="Enter your full name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Aadhaar Number</label>
+                <div class="input-icon-wrap">
+                    <i class="fa-solid fa-id-card input-icon"></i>
+                    <input type="text" name="aadhar" placeholder="12-digit Aadhaar number" maxlength="14" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Mobile Number (Linked to Aadhaar)</label>
+                <div class="input-icon-wrap">
+                    <i class="fa-solid fa-mobile-screen-button input-icon"></i>
+                    <input type="tel" name="mobile" placeholder="+91 76543 21098" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>State of Residence</label>
+                <select name="state">
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="All India">All India</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Other">Other State</option>
+                </select>
+            </div>
+
+            <p class="auth-consent">
+                By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                An OTP will be sent to your registered mobile number for verification.
+            </p>
+
+            <button type="submit" class="btn-primary" style="width:100%; justify-content:center; margin-top:4px;">
+                <i class="fa-solid fa-circle-check"></i> Verify &amp; Register
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Already registered?
+            <a href="/login">Login here</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

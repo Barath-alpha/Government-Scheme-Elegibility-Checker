@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Citizen Command Center — SchemeHelper.AI{% endblock %}
+
+{% block content %}
+
+<!-- ===== DASHBOARD HEADER ===== -->
+<div class="dashboard-header">
+    <h1>Citizen <em>Command Center</em></h1>
+    <p>Enter your details to get AI-powered scheme matches. Track applications and manage documents in one place.</p>
+</div>
+
+<!-- ===== GOVERNMENT UPDATES MARQUEE ===== -->
+<div class="updates-ticker"
+    style="background:#fff;border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:10px 6%;display:flex;align-items:center;margin-bottom:24px;">
+    <div
+        style="background:var(--red);color:#fff;font-weight:700;font-size:0.75rem;padding:4px 12px;border-radius:20px;white-space:nowrap;margin-right:16px;display:flex;align-items:center;gap:6px;">
+        <span
+            style="display:inline-block;width:6px;height:6px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite;"></span>
+        LIVE UPDATES
+    </div>
+    <div style="overflow:hidden;white-space:nowrap;flex:1;">
+        <marquee behavior="scroll" direction="left" scrollamount="5"
+            style="font-size:0.9rem;font-weight:600;color:var(--navy-dark);padding-top:2px;" onmouseover="this.stop();"
+            onmouseout="this.start();">
+            <span style="margin-right:40px;"><i class="fa-solid fa-bullhorn"
+                    style="color:var(--saffron);margin-right:6px;"></i> Govt releases ₹18,000 Crore under PM-KISAN.
+                Check your status.</span>
+            <span style="margin-right:40px;"><i class="fa-solid fa-bullhorn"
+                    style="color:var(--saffron);margin-right:6px;"></i> Last date for Kalaignar Magalir Urimai Thogai
+                applications extended.</span>
+            <span style="margin-right:40px;"><i class="fa-solid fa-bullhorn"
+                    style="color:var(--saffron);margin-right:6px;"></i> Mudra Loan interest Subvention scheme renewed
+                for MSMEs.</span>
+            <span style="margin-right:40px;"><i class="fa-solid fa-bullhorn"
+                    style="color:var(--saffron);margin-right:6px;"></i> Ayushman Bharat portal e-KYC deadline
+                approaching.</span>
+        </marquee>
+    </div>
+</div>
+<!-- ===== MAIN GRID ===== -->
+<section class="dashboard-elite">
+
+    <!-- SIDEBAR: AI Finder Form -->
+    <aside>
+        <div class="glass-panel">
+            <div class="panel-title">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Smart AI Finder
+            </div>
+
+            <form id="elite-eligibility-form">
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="age" value="28" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label>Annual Family Income (₹)</label>
+                    <input type="number" name="income" value="150000" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other / Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>State / UT</label>
+                    <select name="state">
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="All India">All India (Any State)</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Other">Other State</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Primary Occupation</label>
+                    <select name="occupation">
+                        <option value="Farmer">Farmer / Agriculture</option>
+                        <option value="Student">Student / Researcher</option>
+                        <option value="Entrepreneur">Entrepreneur / Startup</option>
+                        <option value="Unemployed">Job Seeker</option>
+                        <option value="Women Empowerment">Women-led Initiatives</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Educational Qualification</label>
+                    <select name="education">
+                        <option value="Graduate">Post-Graduate / Graduate</option>
+                        <option value="Higher Secondary">Higher Secondary (Class 12)</option>
+                        <option value="Primary">Below Class 10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Life Event Context</label>
+                    <select name="life_event">
+                        <option value="Startup">Starting a New Business</option>
+                        <option value="Marriage">Seeking Marriage Assistance</option>
+                        <option value="Healthcare">Medical Emergency / Support</option>
+                        <option value="Education">Pursuing Higher Studies</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%; justify-content:center; margin-top:8px;">
+                    <i class="fa-solid fa-brain"></i> Ask AI to Match Schemes
+                </button>
+            </form>
+
+            <!-- Document Readiness -->
+            <div class="doc-divider">
+                <h4><i class="fa-solid fa-file-shield" style="color:var(--saffron); margin-right:6px;"></i> Document
+                    Readiness</h4>
+                <div class="doc-item">
+                    <span><i class="fa-solid fa-circle-check" style="color:var(--green); margin-right:6px;"></i>Aadhaar
+                        Card</span>
+                    <span class="doc-status-ok">Verified</span>
+                </div>
+                <div class="doc-item">
+                    <span><i class="fa-solid fa-circle-xmark" style="color:var(--red); margin-right:6px;"></i>Income
+                        Certificate</span>
+                    <span class="doc-status-bad">Expired</span>
+                </div>
+                <div class="doc-item">
+                    <span><i class="fa-solid fa-clock" style="color:var(--saffron); margin-right:6px;"></i>Caste
+                        Certificate</span>
+                    <span style="color:var(--saffron); font-weight:600; font-size:0.8rem;">Pending</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN: Results + Meter -->
+    <main>
+        <!-- Animated Score Meter Panel -->
+        <div class="meter-panel">
+            <div class="circular-meter">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle class="meter-bg" cx="100" cy="100" r="85"></circle>
+                    <circle class="meter-fill" id="meter-circle" cx="100" cy="100" r="85"></circle>
+                </svg>
+                <div class="meter-text">
+                    <span id="score-val">0</span>
+                    <small style="color:var(--text-muted); font-size:1rem; font-weight:600;">%</small>
+                </div>
+            </div>
+            <div class="meter-info">
+                <h3>Real-time AI Matching</h3>
+                <p id="match-status">Submit your profile to start the AI analysis...</p>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">Our engine analyzes 120+
+                    parameters to find your top welfare matches.</p>
+            </div>
+        </div>
+
+        <!-- AI Recommendation Results -->
+        <div id="recommended-schemes">
+            <div style="text-align:center; padding:60px 20px; color:var(--text-muted);">
+                <i class="fa-solid fa-brain"
+                    style="font-size:3rem; margin-bottom:16px; display:block; opacity:0.3;"></i>
+                <p style="font-size:0.95rem;">Complete the form and click <strong>"Ask AI to Match Schemes"</strong> to
+                    see results.</p>
+            </div>
+        </div>
+
+        {% if wildcards %}
+        <!-- Hidden Gems / AI Recommendations -->
+        <div class="hidden-gems-section" style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border);">
+            <div style="display:flex;align-items:center;margin-bottom:16px;">
+                <i class="fa-solid fa-gem" style="color:var(--saffron);font-size:1.4rem;margin-right:10px;"></i>
+                <h3 style="font-family:'Outfit',sans-serif;font-size:1.3rem;color:var(--navy-dark);font-weight:700;">
+                    Hidden Gems</h3>
+                <span
+                    style="font-size:0.8rem;background:#e0f2fe;color:#0369a1;padding:4px 8px;border-radius:6px;margin-left:12px;font-weight:700;">Recommended
+                    For You</span>
+            </div>
+
+            <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;">
+                {% for scheme in wildcards %}
+                <div class="gem-card"
+                    style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;min-width:300px;flex:1;box-shadow:0 4px 15px rgba(0,0,0,0.03);display:flex;flex-direction:column;justify-content:space-between;">
+                    <div>
+                        <div
+                            style="font-size:0.75rem;font-weight:700;color:var(--navy);background:var(--navy-light);display:inline-block;padding:3px 8px;border-radius:4px;margin-bottom:10px;">
+                            {{ scheme.sector }}</div>
+                        <h4
+                            style="font-size:1.05rem;color:var(--navy-dark);font-weight:700;font-family:'Outfit',sans-serif;margin-bottom:8px;">
+                            {{ scheme.name }}</h4>
+                        <p
+                            style="font-size:0.85rem;color:var(--text-secondary);line-height:1.5;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
+                            {{ scheme.benefits }}</p>
+                    </div>
+                    {% if scheme.apply_url %}
+                    <a href="{{ scheme.apply_url }}" target="_blank"
+                        style="text-align:center;padding:10px;background:#f8fafc;color:var(--navy);font-weight:700;font-size:0.85rem;border-radius:6px;text-decoration:none;border:1px solid var(--border);transition:all 0.2s;"
+                        onmouseover="this.style.background='var(--navy)';this.style.color='#fff';"
+                        onmouseout="this.style.background='#f8fafc';this.style.color='var(--navy)';"><i
+                            class="fa-solid fa-arrow-up-right-from-square"></i> Learn More</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Application Status Tracker -->
+        <div class="status-tracker">
+            <h3><i class="fa-solid fa-list-check" style="color:var(--saffron); margin-right:8px;"></i> Live Application
+                Status</h3>
+            <div class="status-steps">
+                <div class="step active">
+                    <div class="step-icon">1</div><small>Submitted</small>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">2</div><small>Verified</small>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div><small>Pending</small>
+                </div>
+                <div class="step">
+                    <div class="step-icon">4</div><small>Disbursed</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fraud Detection Widget -->
+        <div id="fraud-detection-widget"
+            style="margin-top:40px;padding:24px;border-radius:12px;background:#fff;border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,0.03);">
+            <div style="display:flex;align-items:center;margin-bottom:12px;">
+                <i class="fa-solid fa-shield-halved" style="color:var(--navy);font-size:1.4rem;margin-right:10px;"></i>
+                <h3 style="font-family:'Outfit',sans-serif;font-size:1.3rem;color:var(--navy-dark);font-weight:700;">
+                    Verify Scheme Authenticity</h3>
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:16px;">Heard about a scheme on
+                WhatsApp? Enter the name to check if it's officially recognized by the Government.</p>
+
+            <div style="display:flex;gap:10px;margin-bottom:16px;">
+                <input type="text" id="verify-scheme-input" placeholder="e.g., Free Laptop Scheme 2024"
+                    style="flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;">
+                <button onclick="verifyScheme()"
+                    style="padding:12px 24px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:0.2s;"
+                    onmouseover="this.style.background='var(--saffron)';"
+                    onmouseout="this.style.background='var(--navy)';">
+                    <i class="fa-solid fa-magnifying-glass"></i> Verify
+                </button>
+            </div>
+
+            <div id="fraud-detection-result"
+                style="display:none;padding:16px;border-radius:8px;font-size:0.9rem;line-height:1.5;"></div>
+        </div>
+    </main>
+</section>
+
+{% endblock %}

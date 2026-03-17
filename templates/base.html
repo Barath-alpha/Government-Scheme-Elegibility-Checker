@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SchemeHelper.AI | Government Scheme Portal{% endblock %}</title>
+    <meta name="description" content="AI-Powered Unified Portal for Central & Tamil Nadu State Government Schemes.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="nav-logos">
+            <div class="logo-circle" title="National Emblem of India">
+                <i class="fa-solid fa-landmark-flag" style="color: var(--navy); font-size: 1.2rem;"></i>
+            </div>
+            <div class="logo-circle" title="Tamil Nadu Government">
+                <i class="fa-solid fa-gopuram" style="color: var(--green); font-size: 1.2rem;"></i>
+            </div>
+            <span class="brand-name">SchemeHelper<span>.AI</span></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#" onclick="openCompareNav(event)">Compare</a></li>
+            <li><a href="#" onclick="openTracker(event)">Tracker</a></li>
+            <li><a href="#" onclick="openHelpCenter(event)">Help Centers</a></li>
+            <li><a href="{{ url_for('dashboard') }}" class="nav-cta">
+                    <i class="fa-solid fa-gauge-high"></i> My Dashboard
+                </a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <!-- Deadline Notifications -->
+            <div class="notif-wrapper" style="position:relative;">
+                <button class="notif-btn"
+                    onclick="document.getElementById('notif-dropdown').style.display = document.getElementById('notif-dropdown').style.display === 'block' ? 'none' : 'block';"
+                    title="Deadline Alerts"
+                    style="background:transparent;border:none;font-size:1.2rem;color:var(--navy);cursor:pointer;position:relative;display:flex;align-items:center;height:100%;padding:4px;">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge"
+                        style="position:absolute;top:0px;right:-2px;background:var(--red);color:#fff;
+                                                     font-size:0.6rem;font-weight:700;padding:2px 5px;border-radius:10px;line-height:1;">2</span>
+                </button>
+                <div id="notif-dropdown" class="notif-dropdown"
+                    style="display:none;position:absolute;top:100%;right:0;width:300px;background:#fff;
+                            border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.1);
+                            z-index:9999;margin-top:10px;overflow:hidden;font-family:'Inter',sans-serif;text-align:left;">
+                    <div
+                        style="padding:12px 16px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;">
+                        <i class="fa-solid fa-bell" style="color:var(--saffron);margin-right:6px;"></i> Scheme Alerts
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;">
+                        <a href="#"
+                            style="display:block;padding:12px 16px;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);">
+                            <div style="font-size:0.8rem;color:var(--red);font-weight:700;margin-bottom:4px;">
+                                <i class="fa-solid fa-clock"></i> 10 Days Left
+                            </div>
+                            <div style="font-size:0.9rem;font-weight:600;margin-bottom:4px;">PM-KISAN Update</div>
+                            <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.4;">Complete your e-KYC
+                                before the deadline to receive the next installment.</div>
+                        </a>
+                        <a href="#" style="display:block;padding:12px 16px;text-decoration:none;color:var(--text);">
+                            <div style="font-size:0.8rem;color:var(--saffron);font-weight:700;margin-bottom:4px;">
+                                <i class="fa-solid fa-calendar-xmark"></i> Closing Soon
+                            </div>
+                            <div style="font-size:0.9rem;font-weight:600;margin-bottom:4px;">Mudra Loan Subsidy</div>
+                            <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.4;">The interest
+                                subvention application portal closes at the end of this month.</div>
+                        </a>
+                    </div>
+                    <div style="padding:10px;text-align:center;background:#f8fafc;border-top:1px solid var(--border);">
+                        <a href="#" style="font-size:0.8rem;color:var(--navy);font-weight:600;text-decoration:none;"
+                            onclick="document.getElementById('notif-dropdown').style.display='none';">Mark all as
+                            read</a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="low-data-btn" onclick="toggleLowData()" title="Low Data Mode">
+                <i class="fa-solid fa-leaf"></i>
+            </button>
+            <div id="google_translate_element" class="language-toggle"
+                style="padding:0; border:none; background:transparent;"></div>
+            <a href="{{ url_for('profile') }}" title="Profile"
+                style="background:transparent;border:none;font-size:1.3rem;color:var(--navy);cursor:pointer;display:flex;align-items:center;margin-left:8px;text-decoration:none;">
+                <i class="fa-solid fa-user-circle"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ===== AI CHAT BUBBLE ===== -->
+    <div id="ai-chat-bubble" onclick="toggleChat()" title="Ask AI Assistant">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- ===== CHATBOT PANEL ===== -->
+    <div class="chat-panel" id="elite-chat-panel">
+        <div class="chat-header">
+            <span><i class="fa-solid fa-robot" style="margin-right:8px;"></i> SchemeHelper.AI Assistant</span>
+            <i class="fa-solid fa-xmark" onclick="toggleChat()" style="cursor:pointer; opacity:0.7;"></i>
+        </div>
+        <div class="chat-messages" id="chat-stream">
+            <div
+                style="background:#fff; border:1.5px solid var(--border); padding:12px 16px; border-radius:12px; font-size:0.88rem; color:var(--text-secondary); max-width:85%;">
+                🙏 <strong>Vanakkam!</strong> I'm your AI welfare assistant. Ask me about any government scheme!
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask about PM-KISAN, scholarships...">
+            <button class="icon-btn search-go" onclick="sendChatMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== COMPARISON MODAL ===== -->
+    <div class="compare-overlay" id="compare-modal">
+        <div class="comparison-container">
+            <i class="fa-solid fa-circle-xmark" onclick="closeCompare()"
+                style="position:absolute;top:20px;right:24px;font-size:1.4rem;cursor:pointer;color:var(--text-muted);"></i>
+            <h2 style="color:var(--navy-dark); font-size:1.6rem;">Scheme Comparison</h2>
+            <p style="color:var(--text-secondary); margin-top:6px; font-size:0.9rem;">AI-powered side-by-side analysis
+                to help you choose the best fit.</p>
+            <div class="compare-grid">
+                <div class="compare-col" id="compare-1">
+                    <h4>Selected Scheme</h4>
+                    <p>Benefits: Loading...</p>
+                    <p>Match Score: —</p>
+                </div>
+                <div class="compare-col" id="compare-2">
+                    <h4>Top AI Recommendation</h4>
+                    <p>Benefits: PM-KISAN ₹6,000/yr</p>
+                    <p>Match Score: 95%</p>
+                    <p>Approval Time: ~15 Days</p>
+                </div>
+            </div>
+            <div
+                style="margin-top:24px; padding:16px; background:var(--green-light); border-radius:var(--radius-md); font-size:0.9rem; color:var(--green);">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <strong> AI Verdict:</strong> PM-KISAN offers faster disbursement with higher match confidence for your
+                profile.
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TRACKER MODAL ===== -->
+    <div class="compare-overlay" id="tracker-modal" style="display:none;">
+        <div class="comparison-container" style="max-width:640px;">
+            <i class="fa-solid fa-circle-xmark" onclick="closeTracker()"
+                style="position:absolute;top:20px;right:24px;font-size:1.4rem;cursor:pointer;color:var(--text-muted);"></i>
+            <h2 style="color:var(--navy-dark);font-size:1.6rem;">
+                <i class="fa-solid fa-list-check" style="color:var(--saffron);margin-right:10px;"></i>Application
+                Tracker
+            </h2>
+            <p style="color:var(--text-secondary);margin-top:6px;font-size:0.9rem;">Track the real-time status of your
+                scheme applications below.</p>
+
+            <!-- Progress Steps -->
+            <div style="margin-top:28px;">
+                <div class="status-steps" style="margin-bottom:28px;">
+                    <div class="step active">
+                        <div class="step-icon">1</div><small>Submitted</small>
+                    </div>
+                    <div class="step active">
+                        <div class="step-icon">2</div><small>Verified</small>
+                    </div>
+                    <div class="step pending">
+                        <div class="step-icon">3</div><small>Processing</small>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">4</div><small>Disbursed</small>
+                    </div>
+                </div>
+
+                <!-- Application Cards -->
+                <div id="tracker-applications">
+                    <div class="tracker-card">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:42px;height:42px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fa-solid fa-seedling" style="color:var(--green);"></i>
+                            </div>
+                            <div style="flex:1;">
+                                <p style="font-weight:700;font-size:0.95rem;color:var(--navy-dark);margin-bottom:2px;">
+                                    PM-KISAN Samman Nidhi</p>
+                                <p style="font-size:0.8rem;color:var(--text-muted);">Applied: 12 Feb 2025 &nbsp;|&nbsp;
+                                    Ref: KISAN-2025-00421</p>
+                            </div>
+                            <span
+                                style="padding:5px 14px;background:var(--green-light);color:var(--green);border-radius:999px;font-size:0.78rem;font-weight:700;">✔
+                                Verified</span>
+                        </div>
+                        <div
+                            style="margin-top:14px;background:#f8fafc;border-radius:10px;padding:12px 16px;font-size:0.85rem;color:var(--text-secondary);">
+                            <i class="fa-solid fa-circle-info" style="color:var(--saffron);margin-right:6px;"></i>
+                            First installment of <strong>₹2,000</strong> expected by <strong>31 Mar 2025</strong>.
+                        </div>
+                    </div>
+
+                    <div class="tracker-card" style="margin-top:14px;">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:42px;height:42px;border-radius:50%;background:#fff7ed;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fa-solid fa-house" style="color:var(--saffron);"></i>
+                            </div>
+                            <div style="flex:1;">
+                                <p style="font-weight:700;font-size:0.95rem;color:var(--navy-dark);margin-bottom:2px;">
+                                    Pradhan Mantri Awas Yojana</p>
+                                <p style="font-size:0.8rem;color:var(--text-muted);">Applied: 28 Jan 2025 &nbsp;|&nbsp;
+                                    Ref: PMAY-2025-00187</p>
+                            </div>
+                            <span
+                                style="padding:5px 14px;background:#fff7ed;color:var(--saffron);border-radius:999px;font-size:0.78rem;font-weight:700;">⏳
+                                Processing</span>
+                        </div>
+                        <div
+                            style="margin-top:14px;background:#f8fafc;border-radius:10px;padding:12px 16px;font-size:0.85rem;color:var(--text-secondary);">
+                            <i class="fa-solid fa-clock" style="color:var(--saffron);margin-right:6px;"></i>
+                            Under district level verification. Expected completion: <strong>15 Apr 2025</strong>.
+                        </div>
+                    </div>
+
+                    <div class="tracker-card" style="margin-top:14px;">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:42px;height:42px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fa-solid fa-heart-pulse" style="color:var(--red);"></i>
+                            </div>
+                            <div style="flex:1;">
+                                <p style="font-weight:700;font-size:0.95rem;color:var(--navy-dark);margin-bottom:2px;">
+                                    Ayushman Bharat PM-JAY</p>
+                                <p style="font-size:0.8rem;color:var(--text-muted);">Applied: 05 Mar 2025 &nbsp;|&nbsp;
+                                    Ref: PMJAY-2025-00893</p>
+                            </div>
+                            <span
+                                style="padding:5px 14px;background:#fef2f2;color:var(--red);border-radius:999px;font-size:0.78rem;font-weight:700;">✕
+                                Docs Needed</span>
+                        </div>
+                        <div
+                            style="margin-top:14px;background:#fef2f2;border-radius:10px;padding:12px 16px;font-size:0.85rem;color:#b91c1c;">
+                            <i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;"></i>
+                            Income certificate missing. <a href="#" style="color:#b91c1c;font-weight:700;">Upload now
+                                →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px;text-align:center;">
+                    <a href="{{ url_for('dashboard') }}" class="btn-primary"
+                        style="display:inline-flex;text-decoration:none;">
+                        <i class="fa-solid fa-gauge-high"></i> Go to Full Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HELP CENTER MODAL ===== -->
+    <div class="compare-overlay" id="help-center-modal" style="display:none;">
+        <div class="comparison-container" style="max-width:680px;">
+            <i class="fa-solid fa-circle-xmark" onclick="closeHelpCenter()"
+                style="position:absolute;top:20px;right:24px;font-size:1.4rem;cursor:pointer;color:var(--text-muted);"></i>
+            <h2 style="color:var(--navy-dark);font-size:1.6rem;">
+                <i class="fa-solid fa-headset" style="color:var(--saffron);margin-right:10px;"></i>Help Centers
+            </h2>
+            <p style="color:var(--text-secondary);margin-top:6px;font-size:0.9rem;">Find support, contact helpdesks, and
+                locate your nearest Common Service Centre.</p>
+
+            <!-- Contact Cards -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;">
+                <div style="padding:18px;background:var(--navy-light);border-radius:14px;">
+                    <i class="fa-solid fa-phone" style="color:var(--navy);font-size:1.4rem;margin-bottom:10px;"></i>
+                    <h4 style="font-weight:700;font-size:0.95rem;margin-bottom:4px;color:var(--navy-dark);">National
+                        Helpline</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">For all Central
+                        Government Schemes</p>
+                    <a href="tel:18004254567"
+                        style="font-size:1.1rem;font-weight:800;color:var(--navy);text-decoration:none;letter-spacing:0.5px;">1800-425-4567</a>
+                    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Mon–Sat, 9 AM – 6 PM (Toll
+                        Free)</p>
+                </div>
+                <div style="padding:18px;background:#fff7ed;border-radius:14px;">
+                    <i class="fa-solid fa-building-columns"
+                        style="color:var(--saffron);font-size:1.4rem;margin-bottom:10px;"></i>
+                    <h4 style="font-weight:700;font-size:0.95rem;margin-bottom:4px;color:var(--navy-dark);">Tamil Nadu
+                        Support</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">For State Government
+                        Schemes</p>
+                    <a href="tel:04424567890"
+                        style="font-size:1.1rem;font-weight:800;color:var(--saffron);text-decoration:none;letter-spacing:0.5px;">044-2456-7890</a>
+                    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Mon–Sat, 10 AM – 5 PM</p>
+                </div>
+                <div style="padding:18px;background:#f0fdf4;border-radius:14px;">
+                    <i class="fa-solid fa-envelope" style="color:var(--green);font-size:1.4rem;margin-bottom:10px;"></i>
+                    <h4 style="font-weight:700;font-size:0.95rem;margin-bottom:4px;color:var(--navy-dark);">Email
+                        Support</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">Queries answered within
+                        48 hrs</p>
+                    <a href="mailto:concierge@schemehelper.gov.in"
+                        style="font-size:0.88rem;font-weight:700;color:var(--green);text-decoration:none;">concierge@schemehelper.gov.in</a>
+                </div>
+                <div
+                    style="padding:18px;background:#fef2f2;border-radius:14px;grid-column:1 / -1;display:flex;flex-direction:column;gap:15px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <i class="fa-solid fa-location-dot"
+                                style="color:var(--red);font-size:1.4rem;margin-bottom:6px;"></i>
+                            <h4 style="font-weight:700;font-size:1.05rem;margin-bottom:2px;color:var(--navy-dark);">
+                                Common Service Centre Locator</h4>
+                            <p style="font-size:0.85rem;color:var(--text-secondary);">Find your nearest CSC for
+                                in-person application help</p>
+                        </div>
+                        <button onclick="locateNearbyCSC()"
+                            style="padding:10px 18px;background:var(--red);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:0.85rem;transition:all 0.2s;"
+                            onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                            <i class="fa-solid fa-location-crosshairs"></i> Use My Location
+                        </button>
+                    </div>
+                    <!-- Map Container -->
+                    <div id="csc-map-container"
+                        style="width:100%;height:220px;border-radius:10px;overflow:hidden;background:#fff;border:1px solid #fecaca;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;">
+                        <span id="csc-map-placeholder">Click 'Use My Location' to search nearby centers.</span>
+                        <iframe id="csc-map-iframe" style="display:none;width:100%;height:100%;border:0;"
+                            allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div style="margin-top:24px;">
+                <h3 style="font-size:1rem;font-weight:700;color:var(--navy-dark);margin-bottom:14px;">
+                    <i class="fa-solid fa-circle-question" style="color:var(--saffron);margin-right:8px;"></i>Quick FAQs
+                </h3>
+                <div id="help-faqs">
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-q">How do I check my application status? <i
+                                class="fa-solid fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-a">Click the <strong>Tracker</strong> link in the navigation bar, or visit the
+                            Application Tracker section in your Dashboard.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-q">What documents are required? <i
+                                class="fa-solid fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-a">Generally: Aadhaar card, income certificate, bank passbook, and any
+                            scheme-specific certificates. The AI Finder will list exact requirements after matching.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-q">How long does approval take? <i
+                                class="fa-solid fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-a">Processing times vary: Central schemes (15–45 days), Tamil Nadu schemes (7–21
+                            days). Disbursement follows within 7 days of approval.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-q">Can I apply for multiple schemes? <i
+                                class="fa-solid fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-a">Yes! You can simultaneously apply for multiple eligible schemes. Our AI
+                            Finder helps you identify all schemes you qualify for.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>SchemeHelper<span style="color:var(--saffron);">.AI</span></h3>
+                <p>The next-generation digital gateway for Indian citizens. Leveraging Artificial Intelligence to bridge
+                    the gap between welfare policies and eligible beneficiaries across Bharat.</p>
+                <div style="margin-top:20px; display:flex; gap:16px; font-size:1.3rem; opacity:0.5;">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Central Schemes</a></li>
+                    <li><a href="#">Tamil Nadu Schemes</a></li>
+                    <li><a href="#">Farmer Subsidies</a></li>
+                    <li><a href="#">Women Empowerment</a></li>
+                    <li><a href="#">Student Scholarships</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact NIC Helpdesk</h4>
+                <p>National Toll Free: <strong style="opacity:1;">1800-425-4567</strong></p>
+                <p>State Support: <strong style="opacity:1;">044-2456-7890</strong></p>
+                <p>Email: concierge@schemehelper.gov.in</p>
+                <button class="btn-outline"
+                    style="margin-top:20px; color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.2);">
+                    Find Nearby Center
+                </button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Content on this portal is managed by the Ministry of Electronics & IT (MeitY) and the Government of Tamil
+            Nadu. &copy; 2025 SchemeHelper.AI
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function toggleLowData() {
+            document.body.classList.toggle('low-data-mode');
+            const btn = document.querySelector('.low-data-btn');
+            const active = document.body.classList.contains('low-data-mode');
+            btn.style.background = active ? 'var(--green-light)' : '';
+            btn.style.borderColor = active ? 'var(--green)' : '';
+            btn.style.color = active ? 'var(--green)' : '';
+        }
+
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav-links');
+            const btn = document.getElementById('hamburger-btn');
+            nav.classList.toggle('mobile-open');
+            btn.classList.toggle('open');
+        }
+
+        // Close mobile nav when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('mobile-open');
+                document.getElementById('hamburger-btn').classList.remove('open');
+            });
+        });
+
+        // Initialize Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ta,te,bn,mr,ur,gu,kn,ml,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

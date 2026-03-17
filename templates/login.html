@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Citizen Login | SchemeHelper.AI{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2>Citizen Login</h2>
+            <p>Access your personalized welfare dashboard</p>
+        </div>
+
+        <form action="/dashboard" method="GET" class="auth-form">
+            <div class="form-group">
+                <label for="aadhar">Aadhaar / Virtual ID</label>
+                <div class="input-icon-wrap">
+                    <i class="fa-solid fa-id-card input-icon"></i>
+                    <input type="text" id="aadhar" name="aadhar" placeholder="xxxx-xxxx-xxxx" required maxlength="14">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password / OTP</label>
+                <div class="input-icon-wrap">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter password or OTP" required>
+                </div>
+            </div>
+
+            <div class="auth-meta">
+                <label class="remember-label">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width:100%; justify-content:center; margin-top:8px;">
+                <i class="fa-solid fa-right-to-bracket"></i> Login Securely
+            </button>
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <button class="btn-outline" style="width:100%; justify-content:center;" onclick="location.href='/dashboard'">
+            <i class="fa-solid fa-mobile-screen-button"></i> Login with Mobile OTP
+        </button>
+
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="/signup">Sign up with Aadhaar</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
